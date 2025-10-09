@@ -6,6 +6,7 @@ from xgboost import XGBClassifier
 
 data = pd.read_csv("https://github.com/dustywhite7/Econ8310/raw/master/AssignmentData/assignment3.csv")
 testData = pd.read_csv("https://github.com/dustywhite7/Econ8310/raw/master/AssignmentData/assignment3test.csv")
+testData = testData.ffill()
 
 
  # Upper case before split, lower case after
@@ -17,9 +18,9 @@ X = data.drop(['meal', 'id', 'DateTime'], axis=1)
 
 #Since we actually ahve test data, no split, instead train on everything and test on given data
 #Modifications to the test data, too, because it's utterly scuffed how this has to fit.
-Yt = data['meal']
+Yt = testData['meal']
 Yt = Yt.head(1000)
-Xt = data.drop(['meal', 'id', 'DateTime'], axis=1)
+Xt = testData.drop(['meal', 'id', 'DateTime'], axis=1)
 Xt = Xt.head(1000)
 
 model = XGBClassifier(n_estimators=1000, max_depth=13, learning_rate=1, objective='binary:logistic')
@@ -29,5 +30,6 @@ modelFit = model.fit(X, Y)
 
 pred = pd.Series(modelFit.predict(Xt))
 
-print(accuracy_score(Yt, pred)*100)
+
+#print(accuracy_score(Yt, pred)*100)
 #Lower learning rate allows us to reduce the pace at which the model makes a new assumption based on the last tree
