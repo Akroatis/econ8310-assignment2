@@ -6,6 +6,7 @@ from xgboost import XGBClassifier
 
 data = pd.read_csv("https://github.com/dustywhite7/Econ8310/raw/master/AssignmentData/assignment3.csv")
 testData = pd.read_csv("https://github.com/dustywhite7/Econ8310/raw/master/AssignmentData/assignment3test.csv")
+testData = testData.head(1000)
 
  # Upper case before split, lower case after
 Y = data['meal']
