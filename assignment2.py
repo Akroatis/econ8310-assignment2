@@ -20,9 +20,9 @@ Xt = data.drop(['meal', 'id', 'DateTime'], axis=1)
 
 model = XGBClassifier(n_estimators=1000, max_depth=15, learning_rate=1, objective='binary:logistic')
 
-model.fit(X, Y)
+modelFit = model.fit(X, Y)
 
-pred = model.predict(Xt)
+pred = modelFit.predict(Xt)
 
 print(accuracy_score(Yt, pred)*100)
 #Lower learning rate allows us to reduce the pace at which the model makes a new assumption based on the last tree
