@@ -22,7 +22,7 @@ model = XGBClassifier(n_estimators=1000, max_depth=15, learning_rate=1, objectiv
 
 modelFit = model.fit(X, Y)
 
-pred = modelFit.predict(Xt)
+pred = pd.Series(modelFit.predict(Xt))
 
 print(accuracy_score(Yt, pred)*100)
 #Lower learning rate allows us to reduce the pace at which the model makes a new assumption based on the last tree
